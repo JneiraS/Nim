@@ -3,12 +3,13 @@
 import os
 
 
-def game_title(func:any):
+def game_title(func: any):
     """
     Décorateur qui efface la console et imprime un titre de jeu avant d'exécuter la fonction décorée.
     Args:
         func (any):
     """
+
     def wrapper(*args, **kwargs):
         # TODO gestion des system Linux
         os.system('cls')
@@ -25,6 +26,7 @@ def game_title(func:any):
                                                                                            \n"""
         )
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -45,15 +47,22 @@ def determine_the_starting_player(players: tuple) -> str:
 
 
 def game_initialization() -> list:
+    """
+    La fonction game_initialization crée une liste de 21 éléments, chacun  à la lettre 'l'.
+    """
     return ['l' for _ in range(21)]
 
 
-def main():
+def removing_elements(elements: list, number_of_elements_to_remove: int) -> None:
+    for _ in range(number_of_elements_to_remove):
+        elements.remove('l')
 
+
+def main():
     player_names = get_player_names()
     determine_the_starting_player(player_names)
 
 
 if __name__ == "__main__":
-    #main()
+    # main()
     print(game_initialization())
