@@ -8,7 +8,8 @@ def game_title(func:any):
         func (any):
     """
     def wrapper(*args, **kwargs):
-        os.system('clear')
+        # TODO gestion des system Linux
+        os.system('cls')
 
         print(
             """                                                                                           
@@ -26,11 +27,11 @@ def game_title(func:any):
 
 
 @game_title
-def get_player_names() -> tuple[str]:
+def get_player_names():
     """
     Demande à l'utilisateur d'entrer les noms des deux joueurs de la partie.
     """
-    return (input("Nom du Joueur 1: "), input("Nom du Joueur 2: "))
+    return input("Nom du Joueur 1: "), input("Nom du Joueur 2: ")
 
 
 @game_title
@@ -49,7 +50,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    """
-    feat: Ajout d'un décorateur pour afficher le titre du jeu avant l'exécution de certaines fonctions, et implémentation des fonctions pour obtenir les noms des joueurs et déterminer le joueur qui commence.
-    """
