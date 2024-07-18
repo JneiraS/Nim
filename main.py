@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
 
 
@@ -42,6 +44,10 @@ def determine_the_starting_player(players: tuple) -> str:
     return input(f"Qui Commence ? {players[0]} (1) ou {players[1]} (2)? : ")
 
 
+def game_initialization() -> list:
+    return ['l' for _ in range(21)]
+
+
 def main():
 
     player_names = get_player_names()
@@ -49,4 +55,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    #main()
+    print(game_initialization())
