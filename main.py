@@ -81,9 +81,16 @@ def ask_players(player: str, list_elements: list) -> int:
     """
 
     print_light_matches(len(list_elements))
-    return int(input(
-        f"\t{player}, il rest {len(list_elements)} allumettes, combien d'allumettes souhaitez-vous "
-        f"enlever?: "))
+
+    while True:
+
+        light_matches_to_remove = int(input(
+            f"\t{player}, il rest {len(list_elements)} allumettes, combien d'allumettes souhaitez-vous "
+            f"enlever?: "))
+        if 0 < light_matches_to_remove < 5:
+            return light_matches_to_remove
+        else:
+            print(f"\t{light_matches_to_remove} n'est pas un nombre compris entre 1 et 4 !")
 
 
 def get_and_switch_player_response(player_index, player_names):
