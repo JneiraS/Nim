@@ -1,4 +1,4 @@
-### **Avancement:** ![](https://geps.dev/progress/25)
+### **Avancement:** ![](https://geps.dev/progress/45)
 ___
 
 # Jeu de Nim - Arbitre
