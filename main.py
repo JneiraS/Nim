@@ -15,15 +15,15 @@ def game_title(func: any):
         os.system('cls')
 
         print(
-            """                                                                                           
-                                                                                           
-       _|                                _|                _|      _|  _|                  
-       _|    _|_|    _|    _|        _|_|_|    _|_|        _|_|    _|      _|_|_|  _|_|    
-       _|  _|_|_|_|  _|    _|      _|    _|  _|_|_|_|      _|  _|  _|  _|  _|    _|    _|  
- _|    _|  _|        _|    _|      _|    _|  _|            _|    _|_|  _|  _|    _|    _|  
-   _|_|      _|_|_|    _|_|_|        _|_|_|    _|_|_|      _|      _|  _|  _|    _|    _|  
-                                                                                           
-                                                                                           \n"""
+            """
+\t       _                  _        _   _ _           
+\t      | |                | |      | \ | (_)          
+\t      | | ___ _   _    __| | ___  |  \| |_ _ __ ___  
+\t  _   | |/ _ | | | |  / _` |/ _ \ | . ` | | '_ ` _ \ 
+\t | |__| |  __| |_| | | (_| |  __/ | |\  | | | | | | |
+\t  \____/ \___|\__,_|  \__,_|\___| |_| \_|_|_| |_| |_|
+                                                     
+                                                     \n"""
         )
         return func(*args, **kwargs)
 
@@ -35,10 +35,10 @@ def print_light_matches(light_matches: int) -> None:
      Affiche visuellement les allumettes restantes.
     :param light_matches: (int) nombre d'allumettes
     """
-    print('\n\n')
-    print('  o ' * light_matches)  # Imprimer les sommets des allumettes
-    print('  | ' * light_matches)  # Imprimer les bases des allumettes
-    print('  | ' * light_matches)  # Imprimer les bases des allumettes
+    print('\n')
+    print('  o ' * light_matches)
+    print('  | ' * light_matches)
+    print('  | ' * light_matches)
     print('\n\n')
 
 
@@ -169,7 +169,7 @@ def initialize_game_and_set_first_player(player_names: tuple):
 
 @game_title
 def main():
-    game_type = input('Jouer contre un amis ou un BOT ? (a/B): ').lower()
+    game_type = input('\tJouer contre un amis ou un BOT ? (a/B): ').lower()
     if game_type == 'a':
         human_vs_human()
     else:
