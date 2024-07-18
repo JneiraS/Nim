@@ -3,19 +3,6 @@
 import os
 
 
-def print_light_matches(light_matches:int) -> None:
-    """
-     Affiche visuellement les allumettes restantes.
-    :param light_matches: (int) nombre d'allumettes
-
-    """
-    print('\n\n')
-    print('  o ' * light_matches)  # Imprimer les sommets des allumettes
-    print('  | ' * light_matches)  # Imprimer les bases des allumettes
-    print('  | ' * light_matches)  # Imprimer les bases des allumettes
-    print('\n\n')
-
-
 def game_title(func: any):
     """
     Décorateur qui efface la console et imprime un titre de jeu avant d'exécuter la fonction décorée.
@@ -43,7 +30,18 @@ def game_title(func: any):
     return wrapper
 
 
-@game_title
+def print_light_matches(light_matches: int) -> None:
+    """
+     Affiche visuellement les allumettes restantes.
+    :param light_matches: (int) nombre d'allumettes
+    """
+    print('\n\n')
+    print('  o ' * light_matches)  # Imprimer les sommets des allumettes
+    print('  | ' * light_matches)  # Imprimer les bases des allumettes
+    print('  | ' * light_matches)  # Imprimer les bases des allumettes
+    print('\n\n')
+
+
 def get_player_names():
     """
     Demande à l'utilisateur d'entrer les noms des deux joueurs de la partie.
@@ -51,15 +49,13 @@ def get_player_names():
     return input("\tNom du Joueur 1: "), input("\tNom du Joueur 2: ")
 
 
-@game_title
 def determine_the_starting_player(players: tuple) -> int:
     """
     Détermine le joueur qui commence en demandant à l'utilisateur.
 
-    :param players: (tuple): Noms des joueurs.
-    :return: (int): Indice du joueur débutant.
+    :param players: (tuple) : Noms des joueurs.
+    :return: (int) : Indice du joueur débutant.
     """
-
     return int(input(f"\tQui Commence ? {players[0]} (1) ou {players[1]} (2)? : ")) - 1
 
 
@@ -85,33 +81,92 @@ def ask_players(player: str, list_elements: list) -> int:
     """
 
     print_light_matches(len(list_elements))
-
-    return int(input(f"\t{player}, combien d'allumettes souhaitez-vous enlever? :"))
+    return int(input(
+        f"\t{player}, il rest {len(list_elements)} allumettes, combien d'allumettes souhaitez-vous "
+        f"enlever?: "))
 
 
 def get_and_switch_player_response(player_index, player_names):
     """
     Retourne la réponse du joueur actuel.
-    :param player_index: (int): Indice du joueur actuel.
-    :param player_names: (list): Liste des noms des joueurs.
-    :return: (int): La réponse du joueur actuel.
+    :param player_index: (int) : Indice du joueur actuel.
+    :param player_names: (list) : Liste des noms des joueurs.
+    :return: (int) : La réponse du joueur actuel.
     """
-    player_response: int = ask_players(player_names[player_index])
-
+    player_response: int = ask_players(player_names[player_index], player_names)
     return player_response
 
 
-def main():
-    player_names: tuple[str, str] = get_player_names()
-    starting_player: int = determine_the_starting_player(player_names)
-    list_of_elements: list = game_initialization()
+@game_title
+def human_vs_human():
+    """
 
-    player_index = player_names.index(player_names[starting_player])
+    :return:
+    """
+    player_names: tuple[str, str] = get_player_names()
+
+    list_of_elements, player_index = initialize_game_and_set_first_player(player_names)
 
     while len(list_of_elements) != 0:
         player_response: int = ask_players(player_names[player_index], list_of_elements)
         removing_elements(list_of_elements, player_response)
         player_index ^= 1
+
+    input(f"\n\tvictoire écrasante de {player_names[player_index]}\n")
+
+
+def human_vs_bot():
+    """
+
+    :return:
+    """
+    player_names: tuple[str, str] = (input('Votre nom ? :'), 'alpha-Nim')
+    list_of_elements, player_index = initialize_game_and_set_first_player(player_names)
+    player_response = 0
+
+    while len(list_of_elements) != 0:
+
+        if player_index == 1 and len(list_of_elements) % 5 > 1 and len(list_of_elements) != 21:
+            bot_response: int = (len(list_of_elements) % 5) - 1
+            removing_elements(list_of_elements, bot_response)
+            player_index ^= 1
+
+        elif player_index == 1:
+            bot_response: int = 5 - player_response if player_response != 0 else 4
+            removing_elements(list_of_elements, bot_response)
+            player_index ^= 1
+
+        else:
+            player_response: int = ask_players(player_names[player_index], list_of_elements)
+            removing_elements(list_of_elements, player_response)
+            player_index ^= 1
+
+    input(f"\n\tvictoire écrasante de {player_names[player_index]}\n")
+
+
+def initialize_game_and_set_first_player(player_names: tuple):
+    """
+     Initialise le jeu et détermine l'indice du joueur qui commence.
+
+    Après avoir identifié le premier joueur à jouer, initialise le jeu et récupère la liste des éléments
+    nécessaires pour le démarrage. Ensuite, calcule l'indice du joueur qui commencera en fonction des noms
+    de joueur fournis.
+    :param player_names:
+    :return: list_of_elements, player_index
+    """
+    starting_player: int = determine_the_starting_player(player_names)
+    list_of_elements: list = game_initialization()
+    player_index: int = player_names.index(player_names[starting_player])
+    return list_of_elements, player_index
+
+
+@game_title
+def main():
+    game_type = input('Jouer contre un amis ou un BOT ? (a/B): ').lower()
+    if game_type == 'a':
+        human_vs_human()
+    else:
+        human_vs_bot()
 
 
 if __name__ == "__main__":
