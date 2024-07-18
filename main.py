@@ -3,6 +3,19 @@
 import os
 
 
+def print_light_matches(light_matches:int) -> None:
+    """
+     Affiche visuellement les allumettes restantes.
+    :param light_matches: (int) nombre d'allumettes
+
+    """
+    print('\n\n')
+    print('  o ' * light_matches)  # Imprimer les sommets des allumettes
+    print('  | ' * light_matches)  # Imprimer les bases des allumettes
+    print('  | ' * light_matches)  # Imprimer les bases des allumettes
+    print('\n\n')
+
+
 def game_title(func: any):
     """
     Décorateur qui efface la console et imprime un titre de jeu avant d'exécuter la fonction décorée.
@@ -35,7 +48,7 @@ def get_player_names():
     """
     Demande à l'utilisateur d'entrer les noms des deux joueurs de la partie.
     """
-    return input("Nom du Joueur 1: "), input("Nom du Joueur 2: ")
+    return input("\tNom du Joueur 1: "), input("\tNom du Joueur 2: ")
 
 
 @game_title
@@ -47,7 +60,7 @@ def determine_the_starting_player(players: tuple) -> int:
     :return: (int): Indice du joueur débutant.
     """
 
-    return int(input(f"Qui Commence ? {players[0]} (1) ou {players[1]} (2)? : ")) - 1
+    return int(input(f"\tQui Commence ? {players[0]} (1) ou {players[1]} (2)? : ")) - 1
 
 
 def game_initialization() -> list:
@@ -66,16 +79,19 @@ def removing_elements(elements: list, number_of_elements_to_remove: int) -> None
 
 
 @game_title
-def ask_players(player: str) -> int:
+def ask_players(player: str, list_elements: list) -> int:
     """
     Demande à un joueur combien d'allumettes il souhaite enlever.
     """
-    return int(input(f" {player}, combien d'allumettes souhaitez-vous enlever? :"))
+
+    print_light_matches(len(list_elements))
+
+    return int(input(f"\t{player}, combien d'allumettes souhaitez-vous enlever? :"))
 
 
 def get_and_switch_player_response(player_index, player_names):
     """
-    retourne la réponse du joueur actuel.
+    Retourne la réponse du joueur actuel.
     :param player_index: (int): Indice du joueur actuel.
     :param player_names: (list): Liste des noms des joueurs.
     :return: (int): La réponse du joueur actuel.
@@ -93,7 +109,8 @@ def main():
     player_index = player_names.index(player_names[starting_player])
 
     while len(list_of_elements) != 0:
-        player_response: int = ask_players(player_names[player_index])
+        player_response: int = ask_players(player_names[player_index], list_of_elements)
+        removing_elements(list_of_elements, player_response)
         player_index ^= 1
 
 
