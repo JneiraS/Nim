@@ -1,8 +1,13 @@
-![](https://geps.dev/progress/0)
+### **Avancement:** ![](https://geps.dev/progress/25)
+___
+
 # Jeu de Nim - Arbitre
+
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-Ce projet contient un script qui arbitre une partie du jeu de Nim. Le jeu de Nim est un jeu de stratégie où deux joueurs s'affrontent en retirant des allumettes d'un tas. Le joueur qui enlève la dernière allumette a perdu.
+Ce projet contient un script qui arbitre une partie du jeu de Nim. Le jeu de Nim est un jeu de stratégie où
+deux joueurs s'affrontent en retirant des allumettes d'un tas. Le joueur qui enlève la dernière allumette a
+perdu.
 
 ## Règles du jeu de Nim
 
