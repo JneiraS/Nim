@@ -31,5 +31,5 @@ perdu.
 Clonez ce dépôt sur votre machine locale :
 
 ```bash
-git clone https://github.com/votre-utilisateur/nim-game-arbitre.git
+git clone https://github.com/JneiraS/nim-game-arbitre.git
 cd nim-game-arbitre
